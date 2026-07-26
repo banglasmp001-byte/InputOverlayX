@@ -103,22 +103,24 @@ jobs:
           distribution: 'temurin'
           java-version: '21'
 
-      - name: Cache Gradle packages
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: "8.10"
+          cache-read-only: false
+
+      - name: Cache Gradle Loom
         uses: actions/cache@v4
         with:
           path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
             ~/.gradle/loom-cache
-          key: ${{ runner.os }}-gradle-${{ matrix.minecraft_version }}-${{ hashFiles('build.gradle', 'gradle.properties') }}
+            .gradle/loom-cache
+          key: ${{ runner.os }}-loom-${{ matrix.minecraft_version }}-${{ hashFiles('build.gradle', 'gradle.properties') }}
           restore-keys: |
-            ${{ runner.os }}-gradle-${{ matrix.minecraft_version }}-
-            ${{ runner.os }}-gradle-
+            ${{ runner.os }}-loom-${{ matrix.minecraft_version }}-
 
-      - name: Generate Gradle Wrapper
-        run: |
-          gradle wrapper --gradle-version 8.10 --distribution-type bin
-          chmod +x gradlew
+      - name: Make gradlew executable
+        run: chmod +x gradlew
 
       - name: Build with Gradle
         run: |
@@ -138,11 +140,11 @@ jobs:
           mkdir -p artifacts
           JAR=$(find build/libs -name "*.jar" ! -name "*-sources*" | head -n 1)
           if [ -z "$JAR" ]; then
-            echo "ERROR: No JAR found"
+            echo "ERROR: No JAR found in build/libs"
             exit 1
           fi
+          echo "Found JAR: $JAR"
           cp "$JAR" "artifacts/InputOverlayX-${{ matrix.minecraft_version }}.jar"
-          echo "Artifact: artifacts/InputOverlayX-${{ matrix.minecraft_version }}.jar"
 
       - name: Upload artifact
         if: success()
@@ -162,4 +164,7 @@ jobs:
       - name: Write summary
         run: |
           echo "## InputOverlayX Build Results" >> $GITHUB_STEP_SUMMARY
-          echo "Check individual version jobs above for details." >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Check the individual version job results above for per-version build status." >> $GITHUB_STEP_SUMMARY
+          echo "Each version JAR is available as a separate downloadable artifact." >> $GITHUB_STEP_SUMMARY
+          
