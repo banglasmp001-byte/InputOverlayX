@@ -200,9 +200,9 @@ public class EditorScreen extends Screen {
     // -------------------------------------------------------------------------
 
     @Override
-    public boolean mouseClicked(double mouseX, double mouseY, int button) {
+    public boolean mouseClicked(double mouseX, double mouseY, int button, boolean bl) {
         // Let buttons handle their own clicks first
-        if (super.mouseClicked(mouseX, mouseY, button)) return true;
+        if (super.mouseClicked(mouseX, mouseY, button, bl)) return true;
 
         var overlayRenderer = InputOverlayXClient.getOverlayRenderer();
         if (overlayRenderer == null) return false;
@@ -247,17 +247,17 @@ public class EditorScreen extends Screen {
     }
 
     @Override
-    public boolean mouseReleased(double mouseX, double mouseY, int button) {
+    public boolean mouseReleased(double mouseX, double mouseY, int button, boolean bl) {
         draggingKeyboard = false;
         draggingMouse    = false;
         resizingKeyboard = false;
         resizingMouse    = false;
-        return super.mouseReleased(mouseX, mouseY, button);
+        return super.mouseReleased(mouseX, mouseY, button, bl);
     }
 
     @Override
     public boolean mouseDragged(double mouseX, double mouseY, int button,
-                                double deltaX, double deltaY) {
+                                double deltaX, double deltaY, boolean bl) {
         float mx = (float) mouseX;
         float my = (float) mouseY;
 
@@ -282,7 +282,7 @@ public class EditorScreen extends Screen {
             return true;
         }
 
-        return super.mouseDragged(mouseX, mouseY, button, deltaX, deltaY);
+        return super.mouseDragged(mouseX, mouseY, button, deltaX, deltaY, bl);
     }
 
     @Override
