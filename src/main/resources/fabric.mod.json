@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "id": "inputoverlayx",
+  "version": "${version}",
+  "name": "InputOverlayX",
+  "description": "A premium keyboard and mouse overlay mod with full 104-key keyboard display, real-time input highlighting, smooth animations, and extensive customization.",
+  "authors": [
+    "InputOverlayX"
+  ],
+  "contact": {
+    "sources": "https://github.com/inputoverlayx/InputOverlayX"
+  },
+  "license": "MIT",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "com.inputoverlayx.client.InputOverlayXClient"
+    ],
+    "modmenu": [
+      "com.inputoverlayx.client.ModMenuIntegration"
+    ]
+  },
+  "mixins": [
+    "inputoverlayx.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "minecraft": "*",
+    "java": ">=21",
+    "fabric-api": "*"
+  },
+  "suggests": {
+    "modmenu": "*",
+    "cloth-config": "*"
+  }
+}
