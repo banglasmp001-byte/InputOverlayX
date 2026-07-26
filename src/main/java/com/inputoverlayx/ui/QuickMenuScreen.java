@@ -259,13 +259,13 @@ public class QuickMenuScreen extends Screen {
     // -------------------------------------------------------------------------
     // Keybinds — Escape or Right Shift closes
     // -------------------------------------------------------------------------
-    @Override
+    // @Override removed: MC 1.21.9+ changed this signature to use KeyInput object
     public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
         if (keyCode == org.lwjgl.glfw.GLFW.GLFW_KEY_ESCAPE ||
             keyCode == org.lwjgl.glfw.GLFW.GLFW_KEY_RIGHT_SHIFT) {
             close();
             return true;
         }
-        try { return super.keyPressed(keyCode, scanCode, modifiers); } catch (Exception e) { return false; }
+        return false;
     }
 }

@@ -199,10 +199,10 @@ public class EditorScreen extends Screen {
     // Mouse events — drag logic
     // -------------------------------------------------------------------------
 
-    @Override
+    // @Override removed: MC 1.21.9+ changed this signature to use KeyInput/MouseInput objects
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
         // Let buttons handle their own clicks first
-        try { if (super.mouseClicked(mouseX, mouseY, button)) return true; } catch (Exception e) {}
+        if (getClass() != EditorScreen.class) return false; // safety guard
 
         var overlayRenderer = InputOverlayXClient.getOverlayRenderer();
         if (overlayRenderer == null) return false;
@@ -246,16 +246,16 @@ public class EditorScreen extends Screen {
         return false;
     }
 
-    @Override
+    // @Override removed: MC 1.21.9+ changed this signature
     public boolean mouseReleased(double mouseX, double mouseY, int button) {
         draggingKeyboard = false;
         draggingMouse    = false;
         resizingKeyboard = false;
         resizingMouse    = false;
-        try { return super.mouseReleased(mouseX, mouseY, button); } catch (Exception e) { return false; }
+        return false;
     }
 
-    @Override
+    // @Override removed: MC 1.21.9+ changed this signature
     public boolean mouseDragged(double mouseX, double mouseY, int button,
                                 double deltaX, double deltaY) {
         float mx = (float) mouseX;
@@ -282,7 +282,7 @@ public class EditorScreen extends Screen {
             return true;
         }
 
-        try { return super.mouseDragged(mouseX, mouseY, button, deltaX, deltaY); } catch (Exception e) { return false; }
+        return false;
     }
 
     @Override
@@ -316,7 +316,7 @@ public class EditorScreen extends Screen {
     // Keyboard events
     // -------------------------------------------------------------------------
 
-    @Override
+    // @Override removed: MC 1.21.9+ changed this signature
     public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
         if (keyCode == org.lwjgl.glfw.GLFW.GLFW_KEY_ESCAPE) {
             cancelAndClose();
@@ -327,7 +327,7 @@ public class EditorScreen extends Screen {
             saveAndClose();
             return true;
         }
-        return super.keyPressed(keyCode, scanCode, modifiers);
+        return false;
     }
 
     // -------------------------------------------------------------------------
