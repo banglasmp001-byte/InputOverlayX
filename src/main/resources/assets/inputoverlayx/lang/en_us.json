@@ -9,10 +9,8 @@
   "inputoverlayx.category.editor": "Editor",
   "inputoverlayx.category.keybinds": "Keybinds",
   "inputoverlayx.category.advanced": "Advanced",
-
   "inputoverlayx.option.enabled": "Enable InputOverlayX",
   "inputoverlayx.option.enabled.tooltip": "Toggle the entire overlay on or off",
-
   "inputoverlayx.option.keyboard_enabled": "Enable Keyboard Overlay",
   "inputoverlayx.option.keyboard_enabled.tooltip": "Show or hide the keyboard overlay",
   "inputoverlayx.option.keyboard_compact": "Compact Keyboard Mode",
@@ -31,7 +29,6 @@
   "inputoverlayx.option.keyboard_hover_color": "Hover Color",
   "inputoverlayx.option.keyboard_shadow": "Enable Shadow",
   "inputoverlayx.option.keyboard_glow": "Enable Glow",
-
   "inputoverlayx.option.mouse_enabled": "Enable Mouse Overlay",
   "inputoverlayx.option.mouse_enabled.tooltip": "Show or hide the mouse overlay",
   "inputoverlayx.option.mouse_x": "Mouse X Position",
@@ -41,11 +38,9 @@
   "inputoverlayx.option.mouse_bg_color": "Mouse Background Color",
   "inputoverlayx.option.mouse_border_color": "Mouse Border Color",
   "inputoverlayx.option.mouse_click_color": "Click Highlight Color",
-
   "inputoverlayx.option.theme": "Theme",
   "inputoverlayx.option.animation_enabled": "Enable Animations",
   "inputoverlayx.option.animation_speed": "Animation Speed",
-
   "inputoverlayx.theme.default": "Default",
   "inputoverlayx.theme.dark": "Dark",
   "inputoverlayx.theme.light": "Light",
@@ -59,9 +54,7 @@
   "inputoverlayx.theme.carbon": "Carbon",
   "inputoverlayx.theme.minimal": "Minimal",
   "inputoverlayx.theme.transparent": "Transparent",
-
   "inputoverlayx.keybind.open_menu": "Open InputOverlayX Menu",
-
   "inputoverlayx.menu.title": "InputOverlayX",
   "inputoverlayx.menu.overlay": "Overlay",
   "inputoverlayx.menu.appearance": "Appearance",
@@ -82,10 +75,12 @@
   "inputoverlayx.menu.reset_position": "Reset Position",
   "inputoverlayx.menu.reset_settings": "Reset Settings",
   "inputoverlayx.menu.close": "Close",
-
   "inputoverlayx.editor.title": "InputOverlayX Editor",
   "inputoverlayx.editor.save": "Save",
   "inputoverlayx.editor.cancel": "Cancel",
   "inputoverlayx.editor.reset": "Reset",
-  "inputoverlayx.editor.hint": "Drag overlays to reposition. Right-click to resize."
+  "inputoverlayx.editor.hint": "Drag overlays to reposition. Right-click to resize.",
+  "key.inputoverlayx.open_menu": "Open InputOverlayX Menu",
+  "key.inputoverlayx.toggle_overlay": "Toggle InputOverlayX Overlay",
+  "key.categories.inputoverlayx": "InputOverlayX"
 }
