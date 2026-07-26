@@ -40,7 +40,7 @@ public class KeybindManager {
                 "key.inputoverlayx.open_menu",
                 InputUtil.Type.KEYSYM,
                 GLFW.GLFW_KEY_RIGHT_SHIFT,
-                CATEGORY
+                KeyBindingHelper.createCategory(CATEGORY)
         ));
     }
 
