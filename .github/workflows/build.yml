@@ -19,77 +19,66 @@ jobs:
           - minecraft_version: "1.21.1"
             yarn_mappings: "1.21.1+build.3"
             loader_version: "0.16.9"
-            fabric_version: "0.100.8+1.21.1"
             cloth_config_version: "15.0.140"
             modmenu_version: "11.0.3"
 
           - minecraft_version: "1.21.2"
             yarn_mappings: "1.21.2+build.1"
             loader_version: "0.16.9"
-            fabric_version: "0.102.0+1.21.2"
             cloth_config_version: "15.0.140"
             modmenu_version: "12.0.0"
 
           - minecraft_version: "1.21.3"
             yarn_mappings: "1.21.3+build.2"
             loader_version: "0.16.9"
-            fabric_version: "0.106.1+1.21.3"
             cloth_config_version: "15.0.140"
             modmenu_version: "12.0.0"
 
           - minecraft_version: "1.21.4"
             yarn_mappings: "1.21.4+build.8"
             loader_version: "0.16.9"
-            fabric_version: "0.110.0+1.21.4"
             cloth_config_version: "15.0.140"
             modmenu_version: "13.0.0"
 
           - minecraft_version: "1.21.5"
             yarn_mappings: "1.21.5+build.1"
             loader_version: "0.16.9"
-            fabric_version: "0.114.0+1.21.5"
             cloth_config_version: "15.0.140"
             modmenu_version: "13.0.0"
 
           - minecraft_version: "1.21.6"
             yarn_mappings: "1.21.6+build.1"
             loader_version: "0.16.9"
-            fabric_version: "0.116.0+1.21.6"
             cloth_config_version: "15.0.140"
             modmenu_version: "14.0.0"
 
           - minecraft_version: "1.21.7"
             yarn_mappings: "1.21.7+build.1"
             loader_version: "0.16.9"
-            fabric_version: "0.117.0+1.21.7"
             cloth_config_version: "15.0.140"
             modmenu_version: "14.0.0"
 
           - minecraft_version: "1.21.8"
             yarn_mappings: "1.21.8+build.1"
             loader_version: "0.16.9"
-            fabric_version: "0.118.0+1.21.8"
             cloth_config_version: "15.0.140"
             modmenu_version: "14.0.0"
 
           - minecraft_version: "1.21.9"
             yarn_mappings: "1.21.9+build.1"
             loader_version: "0.16.9"
-            fabric_version: "0.119.0+1.21.9"
             cloth_config_version: "15.0.140"
             modmenu_version: "14.0.0"
 
           - minecraft_version: "1.21.10"
             yarn_mappings: "1.21.10+build.1"
             loader_version: "0.16.9"
-            fabric_version: "0.120.0+1.21.10"
             cloth_config_version: "15.0.140"
             modmenu_version: "14.0.0"
 
           - minecraft_version: "1.21.11"
             yarn_mappings: "1.21.11+build.1"
             loader_version: "0.16.9"
-            fabric_version: "0.121.0+1.21.11"
             cloth_config_version: "15.0.140"
             modmenu_version: "14.0.0"
 
@@ -108,6 +97,19 @@ jobs:
         with:
           gradle-version: "8.11"
           cache-read-only: false
+
+      - name: Resolve latest Fabric API version
+        id: fabric
+        run: |
+          MC="${{ matrix.minecraft_version }}"
+          METADATA=$(curl -sf "https://maven.fabricmc.net/net/fabricmc/fabric-api/fabric-api/maven-metadata.xml" || echo "")
+          VERSION=$(echo "$METADATA" | grep -o "<version>[^<]*+${MC}<\/version>" | sed 's/<[^>]*>//g' | sort -t. -k1,1n -k2,2n -k3,3n | tail -1)
+          if [ -z "$VERSION" ]; then
+            echo "ERROR: Could not find fabric-api version for MC $MC"
+            exit 1
+          fi
+          echo "Found fabric-api: $VERSION"
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
 
       - name: Cache Gradle Loom
         uses: actions/cache@v4
@@ -128,7 +130,7 @@ jobs:
             -Pminecraft_version=${{ matrix.minecraft_version }} \
             -Pyarn_mappings=${{ matrix.yarn_mappings }} \
             -Ploader_version=${{ matrix.loader_version }} \
-            -Pfabric_version=${{ matrix.fabric_version }} \
+            -Pfabric_version=${{ steps.fabric.outputs.version }} \
             -Pcloth_config_version=${{ matrix.cloth_config_version }} \
             -Pmodmenu_version=${{ matrix.modmenu_version }} \
             --no-daemon \
@@ -167,4 +169,3 @@ jobs:
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "Check the individual version job results above for per-version build status." >> $GITHUB_STEP_SUMMARY
           echo "Each version JAR is available as a separate downloadable artifact." >> $GITHUB_STEP_SUMMARY
-          

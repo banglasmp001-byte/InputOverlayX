@@ -334,9 +334,7 @@ public class EditorScreen extends Screen {
     // Game world — no pause
     // -------------------------------------------------------------------------
 
-    @Override
-    public boolean shouldPause()        { return false; }
-    @Override
+    // shouldPause() removed in MC 1.21.3 — screens no longer pause the game by default
 
     // -------------------------------------------------------------------------
     // Save / Cancel

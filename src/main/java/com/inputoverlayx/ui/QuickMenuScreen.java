@@ -254,8 +254,7 @@ public class QuickMenuScreen extends Screen {
     // -------------------------------------------------------------------------
     // No game pause
     // -------------------------------------------------------------------------
-    @Override
-    public boolean shouldPause() { return false; }
+    // shouldPause() removed in MC 1.21.3 — screens no longer pause the game by default
 
     // -------------------------------------------------------------------------
     // Keybinds — Escape or Right Shift closes

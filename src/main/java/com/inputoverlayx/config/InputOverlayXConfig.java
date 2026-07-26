@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.inputoverlayx.client.InputOverlayXClient;
 import com.inputoverlayx.theme.Theme;
+import com.inputoverlayx.theme.ThemePresets;
 import net.fabricmc.loader.api.FabricLoader;
 
 import java.io.IOException;
