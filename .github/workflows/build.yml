@@ -20,6 +20,7 @@ jobs:
             yarn_mappings: "1.21.1+build.3"
             loader_version: "0.16.9"
             loom_version: "1.9-SNAPSHOT"
+            use_mojang_mappings: "false"
             cloth_config_version: "15.0.140"
             modmenu_version: "11.0.3"
 
@@ -27,6 +28,7 @@ jobs:
             yarn_mappings: "1.21.2+build.1"
             loader_version: "0.16.9"
             loom_version: "1.9-SNAPSHOT"
+            use_mojang_mappings: "false"
             cloth_config_version: "15.0.140"
             modmenu_version: "12.0.0"
 
@@ -34,6 +36,7 @@ jobs:
             yarn_mappings: "1.21.3+build.2"
             loader_version: "0.16.9"
             loom_version: "1.9-SNAPSHOT"
+            use_mojang_mappings: "false"
             cloth_config_version: "15.0.140"
             modmenu_version: "12.0.0"
 
@@ -41,6 +44,7 @@ jobs:
             yarn_mappings: "1.21.4+build.8"
             loader_version: "0.16.9"
             loom_version: "1.9-SNAPSHOT"
+            use_mojang_mappings: "false"
             cloth_config_version: "15.0.140"
             modmenu_version: "13.0.0"
 
@@ -48,6 +52,7 @@ jobs:
             yarn_mappings: "1.21.5+build.1"
             loader_version: "0.16.9"
             loom_version: "1.10-SNAPSHOT"
+            use_mojang_mappings: "false"
             cloth_config_version: "15.0.140"
             modmenu_version: "13.0.0"
 
@@ -55,6 +60,7 @@ jobs:
             yarn_mappings: "1.21.6+build.1"
             loader_version: "0.16.9"
             loom_version: "1.10-SNAPSHOT"
+            use_mojang_mappings: "false"
             cloth_config_version: "15.0.140"
             modmenu_version: "14.0.0"
 
@@ -62,6 +68,7 @@ jobs:
             yarn_mappings: "1.21.7+build.1"
             loader_version: "0.16.9"
             loom_version: "1.10-SNAPSHOT"
+            use_mojang_mappings: "false"
             cloth_config_version: "15.0.140"
             modmenu_version: "14.0.0"
 
@@ -69,27 +76,31 @@ jobs:
             yarn_mappings: "1.21.8+build.1"
             loader_version: "0.16.9"
             loom_version: "1.10-SNAPSHOT"
+            use_mojang_mappings: "false"
             cloth_config_version: "15.0.140"
             modmenu_version: "14.0.0"
 
           - minecraft_version: "1.21.9"
-            yarn_mappings: "1.21.9+build.1"
+            yarn_mappings: ""
             loader_version: "0.16.9"
             loom_version: "1.10-SNAPSHOT"
+            use_mojang_mappings: "true"
             cloth_config_version: "15.0.140"
             modmenu_version: "14.0.0"
 
           - minecraft_version: "1.21.10"
-            yarn_mappings: "1.21.10+build.1"
+            yarn_mappings: ""
             loader_version: "0.16.9"
             loom_version: "1.10-SNAPSHOT"
+            use_mojang_mappings: "true"
             cloth_config_version: "15.0.140"
             modmenu_version: "14.0.0"
 
           - minecraft_version: "1.21.11"
-            yarn_mappings: "1.21.11+build.1"
+            yarn_mappings: ""
             loader_version: "0.16.9"
             loom_version: "1.10-SNAPSHOT"
+            use_mojang_mappings: "true"
             cloth_config_version: "15.0.140"
             modmenu_version: "14.0.0"
 
@@ -139,10 +150,11 @@ jobs:
         run: |
           ./gradlew build \
             -Pminecraft_version=${{ matrix.minecraft_version }} \
-            -Pyarn_mappings=${{ matrix.yarn_mappings }} \
+            -Pyarn_mappings="${{ matrix.yarn_mappings }}" \
             -Ploader_version=${{ matrix.loader_version }} \
             -Pfabric_version=${{ steps.fabric.outputs.version }} \
             -Ploom_version=${{ matrix.loom_version }} \
+            -Puse_mojang_mappings=${{ matrix.use_mojang_mappings }} \
             -Pcloth_config_version=${{ matrix.cloth_config_version }} \
             -Pmodmenu_version=${{ matrix.modmenu_version }} \
             --no-daemon \
