@@ -266,17 +266,6 @@ public class QuickMenuScreen extends Screen {
             close();
             return true;
         }
-        return super.keyPressed(keyCode, scanCode, modifiers);
-    }
-
-    // MC 1.21.9+ added boolean repeat parameter to keyPressed
-    @Override
-    public boolean keyPressed(int keyCode, int scanCode, int modifiers, boolean repeat) {
-        if (keyCode == org.lwjgl.glfw.GLFW.GLFW_KEY_ESCAPE ||
-            keyCode == org.lwjgl.glfw.GLFW.GLFW_KEY_RIGHT_SHIFT) {
-            close();
-            return true;
-        }
-        return super.keyPressed(keyCode, scanCode, modifiers, repeat);
+        try { return super.keyPressed(keyCode, scanCode, modifiers); } catch (Exception e) { return false; }
     }
 }

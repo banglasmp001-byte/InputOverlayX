@@ -99,7 +99,7 @@ jobs:
           - minecraft_version: "1.21.11"
             yarn_mappings: "1.21.11+build.1"
             loader_version: "0.16.9"
-            loom_version: "1.12-SNAPSHOT"
+            loom_version: "1.13-SNAPSHOT"
             use_mojang_mappings: "false"
             cloth_config_version: "15.0.140"
             modmenu_version: "14.0.0"
